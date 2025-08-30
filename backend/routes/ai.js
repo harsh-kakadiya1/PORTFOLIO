@@ -1,0 +1,72 @@
+const express = require('express');
+const { GoogleGenerativeAI } = require('@google/generative-ai');
+const router = express.Router();
+
+// Validate API key exists
+if (!process.env.GEMINI_API_KEY) {
+  console.error('GEMINI_API_KEY not found in environment variables');
+}
+
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+
+// AI Chat endpoint
+router.post('/chat', async (req, res) => {
+  try {
+    const { prompt } = req.body;
+    
+    if (!prompt) {
+      return res.status(400).json({ 
+        error: 'Prompt is required' 
+      });
+    }
+    
+    console.log('Received AI chat request:', prompt);
+    
+    // Get the generative model
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    
+    // Create the system prompt
+    const systemPrompt = `You are the AI assistant for a harsh who is ai ml student terminal-style portfolio. Respond in character as a helpful, witty AI that knows about programming, technology, and this portfolio. Keep responses concise but engaging, and maintain the terminal/hacker aesthetic. Format your response as plain text that would look good in a terminal interface.
+
+User prompt: ${prompt}`;
+    
+    const result = await model.generateContent(systemPrompt);
+    const response = result.response.text();
+    
+    console.log('Gemini response received successfully');
+    res.json({ response });
+  } catch (error) {
+    console.error('Gemini API error details:', {
+      message: error.message,
+      status: error.status,
+      code: error.code,
+      stack: error.stack
+    });
+    
+    // Handle specific Gemini errors
+    if (error.message?.includes('API_KEY_INVALID')) {
+      return res.status(500).json({ 
+        error: 'Invalid Gemini API key. Please check your configuration.' 
+      });
+    }
+    
+    if (error.message?.includes('QUOTA_EXCEEDED')) {
+      return res.status(500).json({ 
+        error: 'Gemini API quota exceeded. Please try again later.' 
+      });
+    }
+    
+    if (error.message?.includes('SAFETY')) {
+      return res.status(500).json({ 
+        error: 'Request blocked by safety filters. Please try a different prompt.' 
+      });
+    }
+    
+    res.status(500).json({ 
+      error: 'AI systems temporarily offline. Please try again or use \'/help\' for available commands.',
+      details: error.message
+    });
+  }
+});
+
+module.exports = router;
