@@ -11,10 +11,9 @@ services:
         value: production
       - key: PORT
         value: 10000
-      - key: MONGODB_URI
-        sync: false
-      - key: OPENAI_API_KEY
-        sync: false
+      # Only OpenAI API key needed - set manually in Render dashboard:
+      key: OPENAI_API_KEY
+      # OPENAI_API_KEY: your_openai_api_key
 
   # Frontend Static Site
   - type: web
@@ -25,4 +24,4 @@ services:
     staticPublishPath: ./frontend/dist
     envVars:
       - key: VITE_API_URL
-        value: https://portfolio-backend.onrender.com
+        value: https://portfolio-backend.onrender.com/api
