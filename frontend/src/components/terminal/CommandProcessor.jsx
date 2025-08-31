@@ -165,40 +165,19 @@ Specializations:
   });
 
   showProjects = async () => {
-    // Return mock projects data instead of API call
-    const mockProjects = [
-      {
-        name: "AI Chat Bot",
-        description: "Intelligent conversational AI built with Python and TensorFlow",
-        tech_stack: ["Python", "TensorFlow", "Flask", "React"],
-        status: "Completed",
-        category: "ai_ml"
-      },
-      {
-        name: "Data Visualization Dashboard",
-        description: "Interactive dashboard for analyzing large datasets",
-        tech_stack: ["Python", "Pandas", "Plotly", "Streamlit"],
-        status: "In Progress",
-        category: "data_science"
-      },
-      {
-        name: "Portfolio Website",
-        description: "This terminal-style portfolio you're currently viewing",
-        tech_stack: ["React", "Node.js", "Framer Motion", "Tailwind CSS"],
-        status: "Completed",
-        category: "web_development"
-      }
-    ];
+    try {
+      const response = await projectsAPI.getAll();
+      const projects = response.data;
 
-    let output = `
+      let output = `
 ╔══════════════════════════════════════════════════════════╗
 ║                   PROJECT PORTFOLIO                      ║
 ╚══════════════════════════════════════════════════════════╝
 
 `;
 
-    mockProjects.forEach((project, index) => {
-      output += `
+      projects.forEach((project, index) => {
+        output += `
 ${index + 1}. ${project.name}
    ├─ ${project.description}
    ├─ Tech: ${project.tech_stack?.join(', ') || 'Not specified'}
@@ -207,9 +186,16 @@ ${index + 1}. ${project.name}
    
    Use: /project ${project.name.toLowerCase().replace(/\s+/g, '_')}
 `;
-    });
+      });
 
-    return { type: 'output', content: output };
+      return { type: 'output', content: output };
+    } catch (error) {
+      console.error('Error fetching projects:', error);
+      return {
+        type: 'error',
+        content: 'Failed to load projects. Please make sure the backend server is running.'
+      };
+    }
   };
 
   showProject = async (args) => {
@@ -220,78 +206,25 @@ ${index + 1}. ${project.name}
       };
     }
 
-    // Mock projects data (same as in showProjects)
-    const mockProjects = [
-      {
-        name: "AI Chat Bot",
-        description: "Intelligent conversational AI built with Python and TensorFlow",
-        tech_stack: ["Python", "TensorFlow", "Flask", "React"],
-        status: "Completed",
-        category: "ai_ml",
-        github_url: "https://github.com/yourusername/ai-chatbot",
-        live_demo: "https://ai-chatbot-demo.com",
-        code_snippet: `# AI Chat Bot - Main conversation handler
-def process_message(user_input):
-    # Tokenize and preprocess input
-    tokens = tokenizer.encode(user_input)
-    
-    # Generate response using trained model
-    response = model.generate(tokens, max_length=100)
-    
-    return tokenizer.decode(response)`
-      },
-      {
-        name: "Data Visualization Dashboard",
-        description: "Interactive dashboard for analyzing large datasets",
-        tech_stack: ["Python", "Pandas", "Plotly", "Streamlit"],
-        status: "In Progress",
-        category: "data_science",
-        github_url: "https://github.com/yourusername/data-dashboard",
-        code_snippet: `# Data Dashboard - Interactive plotting
-import plotly.express as px
-import streamlit as st
+    try {
+      const response = await projectsAPI.getAll();
+      const projects = response.data;
 
-def create_interactive_chart(df):
-    fig = px.scatter(df, x='feature1', y='feature2', 
-                    color='category', size='value')
-    st.plotly_chart(fig, use_container_width=True)`
-      },
-      {
-        name: "Portfolio Website",
-        description: "This terminal-style portfolio you're currently viewing",
-        tech_stack: ["React", "Node.js", "Framer Motion", "Tailwind CSS"],
-        status: "Completed",
-        category: "web_development",
-        github_url: "https://github.com/yourusername/portfolio",
-        live_demo: "https://yourportfolio.com",
-        code_snippet: `// Terminal Portfolio - Command processor
-const processCommand = async (input) => {
-  const [command, ...args] = input.split(' ');
-  
-  if (commands[command]) {
-    return await commands[command](args);
-  }
-  
-  return { type: 'error', content: 'Command not found' };
-};`
+      const projectName = args.join('_');
+      const project = projects.find(p => 
+        p.name.toLowerCase().replace(/\s+/g, '_') === projectName
+      );
+
+      if (!project) {
+        return {
+          type: 'output', 
+          content: `Project "${projectName}" not found. Use /projects to see available projects.`
+        };
       }
-    ];
 
-    const projectName = args.join('_');
-    const project = mockProjects.find(p => 
-      p.name.toLowerCase().replace(/\s+/g, '_') === projectName
-    );
-
-    if (!project) {
       return {
-        type: 'output', 
-        content: `Project "${projectName}" not found. Use /projects to see available projects.`
-      };
-    }
-
-    return {
-      type: 'output',
-      content: `
+        type: 'output',
+        content: `
 ╔══════════════════════════════════════════════════════════╗
 ║                    ${project.name.toUpperCase()}         ║         
 ╚══════════════════════════════════════════════════════════╝
@@ -304,13 +237,21 @@ ${project.description}
 Technical Stack:
 ${project.tech_stack?.map(tech => `• ${tech}`).join('\n') || 'Not specified'}
 
-${project.github_url ? `GitHub: ${project.github_url}` : ''}
-${project.live_demo ? `Live Demo: ${project.live_demo}` : ''}
+${project.github_url ? `🔗 GitHub: <a href="${project.github_url}" target="_blank" style="color: #00bfff; text-decoration: underline; cursor: pointer;">${project.github_url}</a>` : ''}
+${project.live_demo ? `🌐 Live Demo: <a href="${project.live_demo}" target="_blank" style="color: #00bfff; text-decoration: underline; cursor: pointer;">${project.live_demo}</a>` : ''}
 
 
 Status: ${project.status || 'Unknown'}
-      `
-    };
+        `,
+        allowHTML: true
+      };
+    } catch (error) {
+      console.error('Error fetching projects:', error);
+      return {
+        type: 'error',
+        content: 'Failed to load project details. Please make sure the backend server is running.'
+      };
+    }
   };
 
   showContact = () => ({

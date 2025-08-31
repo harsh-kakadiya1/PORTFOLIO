@@ -99,7 +99,8 @@ Try asking me anything - I'm here to help!`,
           type: result.type || 'output',
           content: result.content,
           timestamp: new Date().toLocaleTimeString(),
-          isTyping: true
+          isTyping: true,
+          allowHTML: result.allowHTML
         }]);
       }
     } catch (error) {
@@ -233,6 +234,7 @@ Try asking me anything - I'm here to help!`,
                         isTyping={output.isTyping}
                         onContentChange={handleAutoScroll}
                         onTypingComplete={() => handleTypingComplete(output.id)}
+                        allowHTML={output.allowHTML}
                       />
                     </div>
                   )}

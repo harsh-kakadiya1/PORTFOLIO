@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
-export default function OutputDisplay({ content, isTyping = false, onContentChange, onTypingComplete }) {
+export default function OutputDisplay({ content, isTyping = false, onContentChange, onTypingComplete, allowHTML = false }) {
   const [displayedContent, setDisplayedContent] = useState('');
   const [isCurrentlyTyping, setIsCurrentlyTyping] = useState(false);
   const intervalRef = useRef(null);
@@ -58,16 +58,24 @@ export default function OutputDisplay({ content, isTyping = false, onContentChan
   return (
     <div className="font-mono text-sm whitespace-pre-wrap" ref={contentRef}>
       <div style={{ color: '#00ff41' }}>
-        {displayedContent}
-        {isCurrentlyTyping && displayedContent.length < content.length && (
-          <motion.span
-            animate={{ opacity: [1, 0] }}
-            transition={{ duration: 0.5, repeat: Infinity }}
-            className="text-black px-1"
-            style={{ backgroundColor: '#00ff41' }}
-          >
-            _
-          </motion.span>
+        {allowHTML ? (
+          <div 
+            dangerouslySetInnerHTML={{ __html: displayedContent }}
+          />
+        ) : (
+          <>
+            {displayedContent}
+            {isCurrentlyTyping && displayedContent.length < content.length && (
+              <motion.span
+                animate={{ opacity: [1, 0] }}
+                transition={{ duration: 0.5, repeat: Infinity }}
+                className="text-black px-1"
+                style={{ backgroundColor: '#00ff41' }}
+              >
+                _
+              </motion.span>
+            )}
+          </>
         )}
       </div>
     </div>
