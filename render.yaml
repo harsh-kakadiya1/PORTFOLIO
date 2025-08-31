@@ -11,9 +11,8 @@ services:
         value: production
       - key: PORT
         value: 10000
-      # Only OpenAI API key needed - set manually in Render dashboard:
-      key: GEMINI_API_KEY
-      # OPENAI_API_KEY: your_openai_api_key
+      # Only GEMINI API key needed - set manually in Render dashboard:
+      - key: GEMINI_API_KEY
 
   # Frontend Static Site
   - type: web
