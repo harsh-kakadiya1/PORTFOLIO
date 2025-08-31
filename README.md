@@ -180,6 +180,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ### Backend
 - **Node.js** - Runtime environment
 - **Express.js** - Web application framework
-- **MongoDB** - NoSQL database
-- **OpenAI API** - AI chat functionality
+- **Gemini API** - AI chat functionality
 - **CORS** - Cross-origin resource sharing
