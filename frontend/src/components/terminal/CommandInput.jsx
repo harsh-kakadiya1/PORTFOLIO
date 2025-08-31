@@ -24,11 +24,33 @@ export default function CommandInput({ onCommand, isProcessing, commandHistory =
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const inputRef = useRef(null);
   const dropdownRef = useRef(null);
+  const audioRef = useRef(null);
 
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
+    
+    // Initialize and preload audio
+    const audio = new Audio('/command-sound.mp3');
+    audio.volume = 0.5;
+    audio.preload = 'auto';
+    
+    // Preload the audio by playing it silently
+    const preloadAudio = async () => {
+      try {
+        audio.muted = true;
+        await audio.play();
+        audio.pause();
+        audio.currentTime = 0;
+        audio.muted = false;
+      } catch (error) {
+        console.log('Audio preload failed:', error);
+      }
+    };
+    
+    preloadAudio();
+    audioRef.current = audio;
   }, []);
 
   useEffect(() => {
@@ -50,9 +72,19 @@ export default function CommandInput({ onCommand, isProcessing, commandHistory =
     }
   }, [input]);
 
+  const playCommandSound = () => {
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0;
+      audioRef.current.play().catch(error => {
+        console.log('Audio play failed:', error);
+      });
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (input.trim() && !isProcessing) {
+      playCommandSound(); // Play sound when command is submitted
       onCommand(input.trim());
       setInput('');
       setHistoryIndex(-1);
