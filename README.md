@@ -164,7 +164,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Harsh Kakadiya**
 - GitHub: [@harsh-kakadiya1](https://github.com/harsh-kakadiya1)
 - Portfolio: [Your Portfolio URL]
-- Email: [Your Email]
+- Email: [harshkakadiya128@gmail.com]
 
 ---
 
