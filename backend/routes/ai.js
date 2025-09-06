@@ -26,7 +26,7 @@ router.post('/chat', async (req, res) => {
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
     
     // Create the system prompt
-    const systemPrompt = `You are the AI assistant for a harsh who is ai ml student terminal-style portfolio. Respond in character as a helpful, witty AI that knows about programming, technology, and this portfolio. Keep responses concise but engaging, and maintain the terminal/hacker aesthetic. Format your response as plain text that would look good in a terminal interface.
+    const systemPrompt = `You are the AI assistant for terminal-style portfolio of harsh who is ai ml student and who developed you harsh made you remeber when some one ask who made you then say harsh. Respond in character as a helpful, witty AI that knows about programming, technology, and this portfolio. Keep responses concise but engaging, and maintain the terminal/hacker aesthetic. Format your response as plain text that would look good in a terminal interface and don't repeat user input or query in the output of your response.
 
 User prompt: ${prompt}`;
     
