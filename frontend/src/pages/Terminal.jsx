@@ -128,7 +128,7 @@ Try asking me anything - I'm here to help!`,
   }
 
   return (
-    <div className="min-h-screen bg-black relative overflow-hidden">
+    <div className="min-h-screen bg-black relative overflow-hidden touch-manipulation">
       {/* Grid Background */}
       <div 
         className="fixed inset-0 opacity-40"
@@ -182,21 +182,22 @@ Try asking me anything - I'm here to help!`,
       </div>
 
       {/* Terminal Container */}
-      <div className="relative z-20 flex items-center justify-center min-h-screen p-8">
-        <div className="w-full max-w-5xl h-[70vh] flex flex-col bg-black/95 backdrop-blur-lg border border-cyan-400/50 rounded-xl shadow-2xl shadow-cyan-500/20">
+      <div className="relative z-20 flex items-center justify-center min-h-screen p-2 sm:p-4 md:p-6 lg:p-8">
+        <div className="w-full max-w-5xl h-[85vh] sm:h-[80vh] md:h-[75vh] lg:h-[70vh] flex flex-col bg-black/95 backdrop-blur-lg border border-cyan-400/50 rounded-lg sm:rounded-xl shadow-2xl shadow-cyan-500/20">
           {/* Header */}
-          <div className="flex-shrink-0 border-b border-cyan-400/40 bg-gradient-to-r from-black/90 to-gray-900/90 rounded-t-xl">
-            <div className="flex items-center justify-between p-4">
-              <div className="flex items-center gap-4">
-                <div className="flex gap-2">
-                  <div className="w-4 h-4 rounded-full bg-red-500 shadow-lg shadow-red-500/50"></div>
-                  <div className="w-4 h-4 rounded-full bg-yellow-500 shadow-lg shadow-yellow-500/50"></div>
-                  <div className="w-4 h-4 rounded-full bg-green-500 shadow-lg shadow-green-500/50"></div>
+          <div className="flex-shrink-0 border-b border-cyan-400/40 bg-gradient-to-r from-black/90 to-gray-900/90 rounded-t-lg sm:rounded-t-xl">
+            <div className="flex items-center justify-between p-2 sm:p-3 md:p-4">
+              <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
+                <div className="flex gap-1 sm:gap-2">
+                  <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-red-500 shadow-lg shadow-red-500/50"></div>
+                  <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-yellow-500 shadow-lg shadow-yellow-500/50"></div>
+                  <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-green-500 shadow-lg shadow-green-500/50"></div>
                 </div>
-                <span className="text-cyan-400 font-mono text-lg font-semibold">AI Portfolio Terminal</span>
+                <span className="text-cyan-400 font-mono text-sm sm:text-base md:text-lg font-semibold">AI Portfolio Terminal</span>
               </div>
-              <div className="text-sm font-mono bg-cyan-400/10 px-3 py-1 rounded-full border border-cyan-400/30" style={{ color: '#00d4aa' }}>
-                {currentTime.toLocaleString()}
+              <div className="text-xs sm:text-sm font-mono bg-cyan-400/10 px-2 py-1 sm:px-3 rounded-full border border-cyan-400/30" style={{ color: '#00d4aa' }}>
+                <span className="hidden sm:inline">{currentTime.toLocaleString()}</span>
+                <span className="sm:hidden">{currentTime.toLocaleTimeString()}</span>
               </div>
             </div>
           </div>
@@ -204,7 +205,7 @@ Try asking me anything - I'm here to help!`,
           {/* Terminal Output */}
           <div 
             ref={terminalRef}
-            className="flex-1 overflow-auto bg-black/90 backdrop-blur-sm p-6 space-y-3 scrollbar-thin scrollbar-track-black scrollbar-thumb-cyan-500/40 font-mono text-sm"
+            className="flex-1 overflow-auto bg-black/90 backdrop-blur-sm p-2 sm:p-4 md:p-6 space-y-2 sm:space-y-3 scrollbar-thin scrollbar-track-black scrollbar-thumb-cyan-500/40 font-mono text-xs sm:text-sm"
           >
             <AnimatePresence>
               {outputs.map((output) => (
@@ -217,9 +218,9 @@ Try asking me anything - I'm here to help!`,
                   className="mb-2"
                 >
                   {output.type === 'command' && (
-                    <div className="flex items-center mb-4">
-                      <span className="mr-2" style={{ color: '#00d4aa' }}>guest@ai-portfolio:~$</span>
-                      <span style={{ 
+                    <div className="flex flex-col sm:flex-row sm:items-center mb-2 sm:mb-4">
+                      <span className="mr-0 sm:mr-2 mb-1 sm:mb-0 text-xs sm:text-sm" style={{ color: '#00d4aa' }}>guest@ai-portfolio:~$</span>
+                      <span className="text-xs sm:text-sm break-all sm:break-normal" style={{ 
                         color: output.content.startsWith('/') ? '#00d4ff' : '#ffaa00' 
                       }}>
                         {output.content}
@@ -228,7 +229,7 @@ Try asking me anything - I'm here to help!`,
                   )}
                   
                   {output.type === 'output' && (
-                    <div className="mb-6">
+                    <div className="mb-4 sm:mb-6">
                       <OutputDisplay 
                         content={output.content} 
                         isTyping={output.isTyping}
@@ -240,13 +241,13 @@ Try asking me anything - I'm here to help!`,
                   )}
                   
                   {output.type === 'error' && (
-                    <div style={{ color: '#ff6b6b' }} className="font-mono mb-4">
+                    <div style={{ color: '#ff6b6b' }} className="font-mono mb-2 sm:mb-4 text-xs sm:text-sm break-words">
                       ERROR: {output.content}
                     </div>
                   )}
 
                   {output.type === 'warning' && (
-                    <div style={{ color: '#ff6b6b' }} className="font-mono mb-4">
+                    <div style={{ color: '#ff6b6b' }} className="font-mono mb-2 sm:mb-4 text-xs sm:text-sm break-words">
                       WARNING: {output.content}
                     </div>
                   )}
@@ -256,8 +257,8 @@ Try asking me anything - I'm here to help!`,
           </div>
 
           {/* Command Input */}
-          <div className="flex-shrink-0 border-t border-cyan-400/40 bg-gradient-to-r from-black/90 to-gray-900/90 rounded-b-xl">
-            <div className="p-4">
+          <div className="flex-shrink-0 border-t border-cyan-400/40 bg-gradient-to-r from-black/90 to-gray-900/90 rounded-b-lg sm:rounded-b-xl">
+            <div className="p-2 sm:p-3 md:p-4">
               <CommandInput 
                 onCommand={handleCommand}
                 isProcessing={isProcessing}
@@ -277,17 +278,35 @@ Try asking me anything - I'm here to help!`,
           scrollbar-color: rgba(0, 212, 170, 0.3) black;
         }
         ::-webkit-scrollbar {
-          width: 6px;
+          width: 4px;
         }
         ::-webkit-scrollbar-track {
           background: black;
         }
         ::-webkit-scrollbar-thumb {
           background: rgba(0, 212, 170, 0.3);
-          border-radius: 3px;
+          border-radius: 2px;
         }
         ::-webkit-scrollbar-thumb:hover {
           background: rgba(0, 212, 170, 0.5);
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 640px) {
+          ::-webkit-scrollbar {
+            width: 2px;
+          }
+        }
+        
+        /* Prevent zoom on input focus on mobile */
+        input[type="text"] {
+          font-size: 16px;
+        }
+        
+        @media (max-width: 640px) {
+          input[type="text"] {
+            font-size: 16px !important;
+          }
         }
       `}</style>
     </div>

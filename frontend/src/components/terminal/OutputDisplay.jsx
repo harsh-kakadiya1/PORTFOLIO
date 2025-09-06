@@ -56,10 +56,11 @@ export default function OutputDisplay({ content, isTyping = false, onContentChan
   if (!content) return null;
 
   return (
-    <div className="font-mono text-sm whitespace-pre-wrap" ref={contentRef}>
+    <div className="font-mono text-xs sm:text-sm whitespace-pre-wrap break-words" ref={contentRef}>
       <div style={{ color: '#00ff41' }}>
         {allowHTML ? (
           <div 
+            className="break-words"
             dangerouslySetInnerHTML={{ __html: displayedContent }}
           />
         ) : (

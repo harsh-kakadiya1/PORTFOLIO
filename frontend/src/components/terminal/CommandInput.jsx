@@ -152,36 +152,38 @@ export default function CommandInput({ onCommand, isProcessing, commandHistory =
 
   return (
     <div className="relative">
-      <form onSubmit={handleSubmit} className="flex items-center">
-        <span className="font-mono mr-2 select-none" style={{ color: '#00d4aa' }}>
+      <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row sm:items-center">
+        <span className="font-mono mr-0 sm:mr-2 mb-1 sm:mb-0 select-none text-xs sm:text-sm" style={{ color: '#00d4aa' }}>
           guest@ai-portfolio:~$
         </span>
-        <input
-          ref={inputRef}
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={handleKeyDown}
-          disabled={isProcessing}
-          className="flex-1 bg-transparent font-mono outline-none border-none disabled:opacity-50"
-          style={{ 
-            color: '#00d4ff',
-            caretColor: '#00d4ff'
-          }}
-          placeholder={isProcessing ? "AI is thinking..." : "Type a command or '/' for suggestions..."}
-          autoComplete="off"
-          spellCheck={false}
-        />
-        {isProcessing && (
-          <motion.div
-            animate={{ opacity: [1, 0.5, 1] }}
-            transition={{ duration: 1, repeat: Infinity }}
-            className="ml-2"
-            style={{ color: '#00d4aa' }}
-          >
-            ⟩⟩⟩
-          </motion.div>
-        )}
+        <div className="flex items-center flex-1">
+          <input
+            ref={inputRef}
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleKeyDown}
+            disabled={isProcessing}
+            className="flex-1 bg-transparent font-mono outline-none border-none disabled:opacity-50 text-xs sm:text-sm"
+            style={{ 
+              color: '#00d4ff',
+              caretColor: '#00d4ff'
+            }}
+            placeholder={isProcessing ? "AI is thinking..." : "Type a command or '/' for suggestions..."}
+            autoComplete="off"
+            spellCheck={false}
+          />
+          {isProcessing && (
+            <motion.div
+              animate={{ opacity: [1, 0.5, 1] }}
+              transition={{ duration: 1, repeat: Infinity }}
+              className="ml-2 text-xs sm:text-sm"
+              style={{ color: '#00d4aa' }}
+            >
+              ⟩⟩⟩
+            </motion.div>
+          )}
+        </div>
       </form>
 
       {/* Command Dropdown */}
@@ -193,7 +195,7 @@ export default function CommandInput({ onCommand, isProcessing, commandHistory =
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-full left-0 right-0 mt-2 bg-black/95 border border-cyan-400/40 rounded-lg shadow-2xl shadow-cyan-500/20 backdrop-blur-sm z-50 max-h-64 overflow-y-auto"
+            className="absolute top-full left-0 right-0 mt-2 bg-black/95 border border-cyan-400/40 rounded-lg shadow-2xl shadow-cyan-500/20 backdrop-blur-sm z-50 max-h-48 sm:max-h-64 overflow-y-auto"
           >
             <div className="p-2">
               <div className="text-cyan-400 text-xs font-mono mb-2 px-2">
@@ -202,7 +204,7 @@ export default function CommandInput({ onCommand, isProcessing, commandHistory =
               {filteredCommands.map((cmd, index) => (
                 <motion.div
                   key={cmd.command}
-                  className={`px-3 py-2 rounded cursor-pointer font-mono text-sm transition-colors ${
+                  className={`px-2 sm:px-3 py-1.5 sm:py-2 rounded cursor-pointer font-mono text-xs sm:text-sm transition-colors ${
                     index === selectedIndex 
                       ? 'bg-cyan-400/20 border-l-2 border-cyan-400' 
                       : 'hover:bg-cyan-400/10'
@@ -210,16 +212,17 @@ export default function CommandInput({ onCommand, isProcessing, commandHistory =
                   onClick={() => selectCommand(cmd.command)}
                   whileHover={{ x: 2 }}
                 >
-                  <div className="flex items-center justify-between">
-                    <span style={{ color: '#00d4ff' }}>{cmd.command}</span>
-                    <span className="text-xs text-gray-400 ml-2">{cmd.description}</span>
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                    <span className="text-xs sm:text-sm" style={{ color: '#00d4ff' }}>{cmd.command}</span>
+                    <span className="text-xs text-gray-400 mt-0.5 sm:mt-0 sm:ml-2">{cmd.description}</span>
                   </div>
                 </motion.div>
               ))}
             </div>
             <div className="border-t border-cyan-400/20 p-2">
               <div className="text-xs text-gray-500 font-mono">
-                ↑↓ Navigate • Enter Select • Esc Close
+                <span className="hidden sm:inline">↑↓ Navigate • Enter Select • Esc Close</span>
+                <span className="sm:hidden">↑↓ Navigate • Enter Select</span>
               </div>
             </div>
           </motion.div>
