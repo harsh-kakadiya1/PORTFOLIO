@@ -15,7 +15,10 @@ export const projectsAPI = {
 };
 
 export const aiAPI = {
-  chat: (prompt) => api.post('/ai/chat', { prompt })
+  chat: (prompt, conversationHistory = []) => api.post('/ai/chat', { 
+    prompt, 
+    conversationHistory 
+  })
 };
 
 export default api;

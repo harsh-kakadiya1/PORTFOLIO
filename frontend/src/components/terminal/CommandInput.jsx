@@ -83,8 +83,8 @@ export default function CommandInput({ onCommand, isProcessing, commandHistory =
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    playCommandSound(); // Play sound immediately when Enter is pressed
     if (input.trim() && !isProcessing) {
-      playCommandSound(); // Play sound when command is submitted
       onCommand(input.trim());
       setInput('');
       setHistoryIndex(-1);
@@ -115,6 +115,7 @@ export default function CommandInput({ onCommand, isProcessing, commandHistory =
         return;
       } else if (e.key === 'Enter' && selectedIndex >= 0) {
         e.preventDefault();
+        playCommandSound(); // Play sound when selecting from dropdown
         selectCommand(filteredCommands[selectedIndex].command);
         return;
       } else if (e.key === 'Escape') {

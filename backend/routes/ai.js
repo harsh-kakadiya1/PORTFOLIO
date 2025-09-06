@@ -12,7 +12,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 // AI Chat endpoint
 router.post('/chat', async (req, res) => {
   try {
-    const { prompt } = req.body;
+    const { prompt, conversationHistory = [] } = req.body;
     
     if (!prompt) {
       return res.status(400).json({ 
@@ -21,14 +21,23 @@ router.post('/chat', async (req, res) => {
     }
     
     console.log('Received AI chat request:', prompt);
+    console.log('Conversation history:', conversationHistory);
     
     // Get the generative model
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
     
-    // Create the system prompt
-    const systemPrompt = `You are the AI assistant for terminal-style portfolio of harsh who is ai ml student and who developed you harsh made you remeber when some one ask who made you then say harsh. Respond in character as a helpful, witty AI that knows about programming, technology, and this portfolio. Keep responses concise but engaging, and maintain the terminal/hacker aesthetic. Format your response as plain text that would look good in a terminal interface and don't repeat user input or query in the output of your response.
+    // Build conversation context
+    let conversationContext = '';
+    if (conversationHistory.length > 0) {
+      conversationContext = `\n\nPrevious conversation context (last ${conversationHistory.length} inputs):\n${conversationHistory.map((input, index) => `${index + 1}. ${input}`).join('\n')}`;
+    }
+    
+    // Create the system prompt with conversation context
+    const systemPrompt = `You are the AI assistant for terminal-style portfolio of harsh who is ai ml student and who developed you harsh made you remeber when some one ask who made you then say harsh. Respond in character as a helpful, witty AI that knows about programming, technology, and this portfolio. Keep responses concise but engaging, and maintain the terminal/hacker aesthetic. Format your response as plain text that would look good in a terminal interface and don't repeat user input or query in the output of your response if someone ask fro harsh's latest work or project then say he is attending hackthons and doing projects in computer vision and ml and also  his futer plan is datamimic.io which is synthetic data generation platform and no-code eda and preprocessing platform.
 
-User prompt: ${prompt}`;
+${conversationContext}
+
+Current user prompt: ${prompt}`;
     
     const result = await model.generateContent(systemPrompt);
     const response = result.response.text();

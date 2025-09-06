@@ -69,7 +69,7 @@ export default class CommandProcessor {
     }
     
     // Use AI for non-command input
-    return await this.aiResponse(input);
+    return await this.aiResponse(input, commandHistory);
   }
 
   showHelp = () => ({
@@ -380,9 +380,12 @@ Type /help to see what else you can discover.
     `
   });
 
-  aiResponse = async (input) => {
+  aiResponse = async (input, commandHistory) => {
     try {
-      const response = await aiAPI.chat(input);
+      // Get last 3 inputs for context (excluding current input)
+      const recentInputs = commandHistory.slice(-3);
+      
+      const response = await aiAPI.chat(input, recentInputs);
 
       return {
         type: 'output',
