@@ -57,7 +57,7 @@ export default function OutputDisplay({ content, isTyping = false, onContentChan
 
   return (
     <div className="font-mono text-xs sm:text-sm whitespace-pre-wrap break-words" ref={contentRef}>
-      <div style={{ color: '#00ff41' }}>
+      <div style={{ color: 'rgb(0, 212, 170)' }}>
         {allowHTML ? (
           <div 
             className="break-words"
@@ -71,7 +71,7 @@ export default function OutputDisplay({ content, isTyping = false, onContentChan
                 animate={{ opacity: [1, 0] }}
                 transition={{ duration: 0.5, repeat: Infinity }}
                 className="text-black px-1"
-                style={{ backgroundColor: '#00ff41' }}
+                style={{ backgroundColor: 'rgb(0, 212, 170)' }}
               >
                 _
               </motion.span>

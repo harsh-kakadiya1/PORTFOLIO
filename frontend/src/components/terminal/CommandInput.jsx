@@ -153,7 +153,7 @@ export default function CommandInput({ onCommand, isProcessing, commandHistory =
   return (
     <div className="relative">
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row sm:items-center">
-        <span className="font-mono mr-0 sm:mr-2 mb-1 sm:mb-0 select-none text-xs sm:text-sm" style={{ color: '#00d4aa' }}>
+        <span className="font-mono mr-0 sm:mr-2 mb-1 sm:mb-0 select-none text-xs sm:text-sm" style={{ color: '#00ff41' }}>
           guest@ai-portfolio:~$
         </span>
         <div className="flex items-center flex-1">
@@ -178,7 +178,7 @@ export default function CommandInput({ onCommand, isProcessing, commandHistory =
               animate={{ opacity: [1, 0.5, 1] }}
               transition={{ duration: 1, repeat: Infinity }}
               className="ml-2 text-xs sm:text-sm"
-              style={{ color: '#00d4aa' }}
+              style={{ color: '#00ff41' }}
             >
               ⟩⟩⟩
             </motion.div>

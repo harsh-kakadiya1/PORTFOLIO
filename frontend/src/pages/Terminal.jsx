@@ -219,7 +219,7 @@ Try asking me anything - I'm here to help!`,
                 >
                   {output.type === 'command' && (
                     <div className="flex flex-col sm:flex-row sm:items-center mb-2 sm:mb-4">
-                      <span className="mr-0 sm:mr-2 mb-1 sm:mb-0 text-xs sm:text-sm" style={{ color: '#00d4aa' }}>guest@ai-portfolio:~$</span>
+                      <span className="mr-0 sm:mr-2 mb-1 sm:mb-0 text-xs sm:text-sm" style={{ color: '#00ff41' }}>guest@ai-portfolio:~$</span>
                       <span className="text-xs sm:text-sm break-all sm:break-normal" style={{ 
                         color: output.content.startsWith('/') ? '#00d4ff' : '#ffaa00' 
                       }}>
@@ -268,47 +268,6 @@ Try asking me anything - I'm here to help!`,
           </div>
         </div>
       </div>
-
-      {/* Additional styling */}
-      <style jsx>{`
-        .scrollbar-thin {
-          scrollbar-width: thin;
-        }
-        .scrollbar-track-black {
-          scrollbar-color: rgba(0, 212, 170, 0.3) black;
-        }
-        ::-webkit-scrollbar {
-          width: 4px;
-        }
-        ::-webkit-scrollbar-track {
-          background: black;
-        }
-        ::-webkit-scrollbar-thumb {
-          background: rgba(0, 212, 170, 0.3);
-          border-radius: 2px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-          background: rgba(0, 212, 170, 0.5);
-        }
-        
-        /* Mobile optimizations */
-        @media (max-width: 640px) {
-          ::-webkit-scrollbar {
-            width: 2px;
-          }
-        }
-        
-        /* Prevent zoom on input focus on mobile */
-        input[type="text"] {
-          font-size: 16px;
-        }
-        
-        @media (max-width: 640px) {
-          input[type="text"] {
-            font-size: 16px !important;
-          }
-        }
-      `}</style>
     </div>
   );
 }

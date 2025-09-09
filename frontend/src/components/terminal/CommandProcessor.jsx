@@ -129,15 +129,17 @@ Favorite Quote: "The best way to predict the future is to code it."
 ║                    SKILL MATRIX                          ║
 ╚══════════════════════════════════════════════════════════╝
 
-Programming Languages:
+<span style="color: #ff6b6b;">Programming Languages:</span>
 ━━━━━━━━━━━━━━━━━━━━━━
 Python        ████████████████████ 95%
+C++           ██████████████████   80%
 JavaScript    ████████████████     75%
 TypeScript    ███████████          50%
+R             ███████████          50%
 Go            ███████              40%
 Rust          ██                   10%
 
-AI/ML Frameworks:
+<span style="color: #ff6b6b;">AI/ML Frameworks:</span>
 ━━━━━━━━━━━━━━━━━
 TensorFlow    ███████████████████  90%
 PyTorch       ██████████████████   85%
@@ -145,15 +147,14 @@ Scikit-learn  ███████████████████  90%
 Hugging Face  █████████████████    80%
 Gemini API    ████████████████████ 95%
 
-Web Technologies:
+<span style="color: #ff6b6b;">Web Technologies:</span>
 ━━━━━━━━━━━━━━━━━━
-React         ███████████████      75%
-Node.js       █████████████████    80%
-Next.js       █████████████████    80%
-GraphQL       ████████████████     75%
-Docker        ███████████████████  90%
+React         █████████████████    80%
+Node.js       ███████████████      75%
+Next.js       ██████████████       70%
+Docker        ████████████████     75%
 
-Specializations:
+<span style="color: #ff6b6b;">Specializations:</span>
 ━━━━━━━━━━━━━━━━
 • Machine Learning
 • Computer Vision & NLP
@@ -161,7 +162,8 @@ Specializations:
 • Full-Stack Development  
 • System Design & Architecture
 • Data Analysis & Visualization
-    `
+    `,
+    allowHTML: true
   });
 
   showProjects = async () => {
@@ -261,10 +263,10 @@ Status: ${project.status || 'Unknown'}
 ║                     CONTACT INFO                         ║
 ╚══════════════════════════════════════════════════════════╝
 
-📧 Email: harshkakadiya128@gmail.com
+📧 Email: <a href="mailto:harshkakadiya128@gmail.com" target="_blank" style="color: #ff6b6b; text-decoration: underline; cursor: pointer;">harshkakadiya128@gmail.com</a>
 🌐 Website: you are viewing it right now  
-💼 LinkedIn: www.linkedin.com/in/harsh-kakadiya
-🐱 GitHub: https://github.com/harsh-kakadiya1
+💼 LinkedIn: <a href="https://www.linkedin.com/in/harsh-kakadiya" target="_blank" style="color: #0077b5; text-decoration: underline; cursor: pointer;">www.linkedin.com/in/harsh-kakadiya</a>
+🐱 GitHub: <a href="https://github.com/harsh-kakadiya1" target="_blank" style="color: #ff6b6b; text-decoration: underline; cursor: pointer;">https://github.com/harsh-kakadiya1</a>
 
 💬 I'm always excited to discuss:
    • AI/ML projects and collaborations
@@ -279,7 +281,8 @@ Response time: Usually within 24 hours
 Preferred contact: Email for professional inquiries
 
 Status: Available for new opportunities! 🚀
-    `
+    `,
+    allowHTML: true
   });
 
   showWhoami = () => ({
@@ -340,7 +343,17 @@ ${commandHistory.map((cmd, i) => `  ${i + 1}: ${cmd}`).join('\n') || 'No command
 
     return {
       type: 'output',
-      content: `${ASCII_ARTS.coffee}
+      content: `<span style="color: white;">                    (  )   (   )  )
+                     ) (   )  (  (
+                     ( )  (    ) )</span>
+<span style="color: #b75a35;">                     _____________
+                    &lt;_____________&gt; ___
+                    |             |/ _ \\
+                    |               | | |
+                    |               |_| |
+                 ___|             |\\___/
+                /    \\___________/    \\
+                \\_____________________/</span>
 
 ☕ COFFEE STATUS REPORT ☕
 ━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -351,7 +364,8 @@ Bugs fixed per cup: ${bugsFixed}
 Next refill in: ${nextRefill} minutes
 
 Status: ${status}
-    `
+    `,
+      allowHTML: true
     };
   };
 

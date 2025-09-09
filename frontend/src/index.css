@@ -6,3 +6,47 @@ body {
   background-color: #0a0a0a;
   color: #00ff41;
 }
+
+/* Terminal scrollbar styles */
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+.scrollbar-track-black {
+  scrollbar-color: rgba(0, 212, 170, 0.3) black;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: black;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 212, 170, 0.3);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 212, 170, 0.5);
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  ::-webkit-scrollbar {
+    width: 2px;
+  }
+}
+
+/* Prevent zoom on input focus on mobile */
+input[type="text"] {
+  font-size: 16px;
+}
+
+@media (max-width: 640px) {
+  input[type="text"] {
+    font-size: 16px !important;
+  }
+}
