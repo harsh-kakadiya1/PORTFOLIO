@@ -10,17 +10,8 @@ const ASCII_ARTS = {
      ║          AI-Powered Interface         ║
      ║                                       ║
      ╚═══════════════════════════════════════╝`,
-
-  matrix: `
-    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣤⣤⣤⣤⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⣿⣿⣿⣿⣿⣿⣿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠻⠿⠿⠿⠿⠿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀`,
-
-  coffee: `
+  
+   coffee: `
                     (  )   (   )  )
                      ) (   )  (  (
                      ( )  (    ) )
@@ -46,7 +37,7 @@ export default class CommandProcessor {
       '/clear': () => ({ type: 'clear' }),
       '/whoami': this.showWhoami,
       '/history': this.showHistory,
-      '/hack_the_matrix': this.matrixEffect,
+      '/matrix': this.matrixEffect,
       '/coffee': this.showCoffee,
       '/sudo': this.sudoResponse,
       '/exit': this.exitResponse
@@ -90,6 +81,7 @@ Available Commands:
 
 Easter Eggs:
 ────────────
+/matrix            🌐 Enter the Matrix
 /coffee            ☕ Coding fuel status  
 /sudo              🔒 Try root access
 /exit              🚪 Attempt to exit
@@ -305,6 +297,32 @@ Shell: ai-bash 2.0.24
 Command History:
 ${commandHistory.map((cmd, i) => `  ${i + 1}: ${cmd}`).join('\n') || 'No commands executed yet'}
     `
+  });
+
+  matrixEffect = () => ({
+    type: 'matrix',
+    content: `
+<span style="color: #00ff41;">╔════════════════════════════════════════════════════════════╗</span>
+<span style="color: #00ff41;">║</span>                    <span style="color: #ff0040;">ENTERING THE MATRIX</span>                     <span style="color: #00ff41;">║</span>
+<span style="color: #00ff41;">╚════════════════════════════════════════════════════════════╝</span>
+
+<span style="color: #ff0040;">Wake up, ${Math.random() > 0.5 ? 'Neo' : 'developer'}...</span>
+<span style="color: #00ff41;">The Matrix has you...</span>
+
+<span style="color: #ffffff;">Follow the white rabbit 🐰</span>
+
+<span style="color: #00d4aa;">Reality.exe has stopped working...</span>
+<span style="color: #ffaa00;">Loading alternative reality...</span>
+
+<span style="color: #00ff41;">█████████████████████████████████████████████████</span>
+<span style="color: #00ff41;">█</span> <span style="color: #ffffff;">There is no spoon</span>                             <span style="color: #00ff41;">█</span>
+<span style="color: #00ff41;">█</span> <span style="color: #ffffff;">Free your mind</span>                                <span style="color: #00ff41;">█</span>
+<span style="color: #00ff41;">█</span> <span style="color: #ffffff;">The code is everywhere</span>                        <span style="color: #00ff41;">█</span>
+<span style="color: #00ff41;">█████████████████████████████████████████████████</span>
+
+<span style="color: #ff0040;">You have been unplugged from the Matrix!</span>
+    `,
+    allowHTML: true
   });
 
   showCoffee = () => {

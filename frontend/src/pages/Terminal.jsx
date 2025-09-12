@@ -60,7 +60,8 @@ export default function Terminal() {
 I'm an AI version of the developer behind this portfolio.
 Type '/help' to see what we can explore together.
 Try asking me anything - I'm here to help!`,
-      timestamp: new Date().toLocaleTimeString()
+      timestamp: new Date().toLocaleTimeString(),
+      isTyping: true // Enable typewriter effect for welcome message
     }]);
   };
 
@@ -85,13 +86,14 @@ Try asking me anything - I'm here to help!`,
         setOutputs([]);
       } else if (result.type === 'matrix') {
         setMatrixMode(true);
-        setTimeout(() => setMatrixMode(false), 3000);
+        setTimeout(() => setMatrixMode(false), 5000); // Extended matrix mode
         setOutputs(prev => [...prev, {
           id: Date.now() + 1,
           type: 'output',
           content: result.content,
           timestamp: new Date().toLocaleTimeString(),
-          isTyping: true
+          isTyping: true,
+          allowHTML: result.allowHTML
         }]);
       } else {
         setOutputs(prev => [...prev, {
@@ -146,30 +148,100 @@ Try asking me anything - I'm here to help!`,
       <AnimatePresence>
         {matrixMode && (
           <div className="fixed inset-0 z-10 pointer-events-none">
-            {Array.from({ length: 50 }, (_, i) => (
+            {Array.from({ length: 150 }, (_, i) => (
               <motion.div
                 key={i}
-                className="absolute text-green-500 text-xs select-none opacity-70"
+                className="absolute select-none font-mono"
+                style={{
+                  color: Math.random() > 0.1 ? '#00ff41' : '#ffffff',
+                  fontSize: Math.random() > 0.5 ? '12px' : '16px',
+                  fontWeight: Math.random() > 0.7 ? 'bold' : 'normal'
+                }}
                 initial={{ 
-                  y: -20, 
+                  y: -50, 
                   x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
                   opacity: 0 
                 }}
                 animate={{ 
-                  y: (typeof window !== 'undefined' ? window.innerHeight : 800) + 20,
-                  opacity: [0, 1, 0]
+                  y: (typeof window !== 'undefined' ? window.innerHeight : 800) + 50,
+                  opacity: [0, 1, 0.8, 0]
                 }}
                 exit={{ opacity: 0 }}
                 transition={{
-                  duration: Math.random() * 2 + 1,
-                  repeat: 2,
-                  ease: "linear"
+                  duration: Math.random() * 3 + 2,
+                  repeat: 3,
+                  ease: "linear",
+                  delay: Math.random() * 0.5
                 }}
               >
-                {String.fromCharCode(0x30A0 + Math.random() * 96)}
+                {(() => {
+                  const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZアイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+                  return chars[Math.floor(Math.random() * chars.length)];
+                })()}
+              </motion.div>
+            ))}
+            
+            {/* Add some binary streams */}
+            {Array.from({ length: 30 }, (_, i) => (
+              <motion.div
+                key={`binary-${i}`}
+                className="absolute select-none font-mono text-green-400"
+                style={{
+                  fontSize: '10px',
+                  left: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
+                  opacity: 0.6
+                }}
+                initial={{ y: -20 }}
+                animate={{ y: (typeof window !== 'undefined' ? window.innerHeight : 800) + 20 }}
+                transition={{
+                  duration: Math.random() * 4 + 3,
+                  repeat: 2,
+                  ease: "linear",
+                  delay: Math.random() * 1
+                }}
+              >
+                {Array.from({ length: Math.floor(Math.random() * 10) + 5 }, () => 
+                  Math.random() > 0.5 ? '1' : '0'
+                ).join('')}
               </motion.div>
             ))}
           </div>
+        )}
+      </AnimatePresence>
+
+      {/* Matrix overlay effect */}
+      <AnimatePresence>
+        {matrixMode && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.8 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-5 pointer-events-none"
+            style={{
+              background: `
+                radial-gradient(ellipse at center, 
+                  rgba(0, 255, 65, 0.1) 0%, 
+                  rgba(0, 0, 0, 0.3) 50%, 
+                  rgba(0, 0, 0, 0.7) 100%
+                )
+              `,
+              backdropFilter: 'contrast(1.2) brightness(0.8)'
+            }}
+          >
+            <div className="absolute inset-0 opacity-30" 
+                 style={{
+                   backgroundImage: `
+                     repeating-linear-gradient(
+                       0deg,
+                       transparent,
+                       transparent 2px,
+                       rgba(0, 255, 65, 0.1) 2px,
+                       rgba(0, 255, 65, 0.1) 4px
+                     )
+                   `
+                 }} 
+            />
+          </motion.div>
         )}
       </AnimatePresence>
 
