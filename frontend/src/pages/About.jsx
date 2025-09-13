@@ -46,22 +46,16 @@ export default function About() {
 
   const experience = [
     {
+      role: "Data Analyst",
+      company: "Samatrix Consulting Private Limited, Gurugram, Haryana, India.",
+      period: "May 2025 - Jun 2025 (2 months)",
+      description: "I worked on Data Analysis projects involving the application of statistical techniques and tools."
+    },
+    {
       role: "Full Stack Developer",
-      company: "Freelance Projects",
-      period: "2023 - Present",
-      description: "Built responsive web applications using React, Node.js, and modern tech stack"
-    },
-    {
-      role: "AI/ML Enthusiast",
-      company: "Personal Projects",
-      period: "2022 - Present",
-      description: "Developed machine learning models and AI-powered applications"
-    },
-    {
-      role: "Open Source Contributor",
-      company: "GitHub Community",
-      period: "2022 - Present",
-      description: "Contributing to open source projects and building developer tools"
+      company: "Limpid Systems, Surat, Gujarat, India.",
+      period: "May 2025 - Jun 2025 (2 months)",
+      description: "I gained hands-on experience with the MERN stack, finding great satisfaction in working with React and JavaScript."
     }
   ];
 
