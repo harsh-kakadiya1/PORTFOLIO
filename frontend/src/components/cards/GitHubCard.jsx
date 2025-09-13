@@ -32,7 +32,7 @@ export default function GitHubCard({ initialPosition = { x: 50, y: 150 } }) {
           </svg>
           <div>
             <h3 className="text-white font-semibold text-lg">GitHub</h3>
-            <p className="text-gray-400 text-sm">@harsh-kakadiya</p>
+            <p className="text-gray-400 text-sm">@harsh-kakadiya1</p>
           </div>
         </div>
 

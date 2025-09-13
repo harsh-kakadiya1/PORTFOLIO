@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import DraggableCard from './DraggableCard';
 
-export default function LinkedInCard({ initialPosition = { x: 350, y: 150 } }) {
+export default function LinkedInCard({ initialPosition = { x: 20, y: 100 } }) {
   const handleClick = () => {
     window.open('https://linkedin.com/in/harsh-kakadiya', '_blank');
   };
@@ -39,7 +39,7 @@ export default function LinkedInCard({ initialPosition = { x: 350, y: 150 } }) {
         {/* Professional Info */}
         <div className="text-sm">
           <div className="text-white font-medium">AI/ML Enthusiast</div>
-          <div className="text-blue-200 text-xs">500+ Connections</div>
+          <div className="text-blue-200 text-xs">400+ Connections</div>
         </div>
 
         {/* Hover effect overlay */}

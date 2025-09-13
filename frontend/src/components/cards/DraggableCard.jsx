@@ -9,6 +9,7 @@ export default function DraggableCard({
   onLeave,
   onClick,
   isDraggable = true,
+  glowColor = "cyan", 
   ...props 
 }) {
   const [position, setPosition] = useState(initialPosition);
@@ -107,7 +108,9 @@ export default function DraggableCard({
       <motion.div
         animate={{
           boxShadow: isHovered 
-            ? "0 0 30px rgba(0, 255, 255, 0.6), 0 0 60px rgba(0, 255, 255, 0.3)" 
+            ? glowColor === "red" 
+              ? "0 0 30px rgba(220, 38, 38, 0.6), 0 0 60px rgba(220, 38, 38, 0.3)"
+              : "0 0 30px rgba(0, 255, 255, 0.6), 0 0 60px rgba(0, 255, 255, 0.3)"
             : "none"
         }}
         transition={{ duration: 0.3 }}

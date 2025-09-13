@@ -61,7 +61,7 @@ export default function Terminal() {
       type: 'output',
       content: `Welcome to my AI-powered portfolio terminal! 
 
-I'm an AI version of the developer behind this portfolio.
+I'm Agastya, a personal AI assistant of Harsh Kakadiya.
 Type '/help' to see what we can explore together.
 Try asking me anything - I'm here to help!`,
       timestamp: new Date().toLocaleTimeString(),
@@ -152,7 +152,7 @@ Try asking me anything - I'm here to help!`,
       <GitHubCard initialPosition={{ x: 20, y: 40 }} />
       <LinkedInCard initialPosition={{ x: 20, y: 180 }} />
       <SpotifyCard initialPosition={{ x: 20, y: 320 }} />
-      <BucketListCard initialPosition={{ x: 850, y: 150 }} />
+      <BucketListCard initialPosition={{ x: 950, y: 150 }} />
 
       {/* Matrix rain effect */}
       <AnimatePresence>
@@ -275,7 +275,7 @@ Try asking me anything - I'm here to help!`,
                   <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-yellow-500 shadow-lg shadow-yellow-500/50"></div>
                   <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-green-500 shadow-lg shadow-green-500/50"></div>
                 </div>
-                <span className="text-cyan-400 font-mono text-sm sm:text-base md:text-lg font-semibold">AI Portfolio Terminal</span>
+                <span className="text-cyan-400 font-mono text-sm sm:text-base md:text-lg font-semibold">Agastya AI Terminal</span>
               </div>
               <div className="text-xs sm:text-sm font-mono bg-cyan-400/10 px-2 py-1 sm:px-3 rounded-full border border-cyan-400/30" style={{ color: '#00d4aa' }}>
                 <span className="hidden sm:inline">{currentTime.toLocaleString()}</span>
