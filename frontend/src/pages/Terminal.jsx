@@ -6,6 +6,7 @@ import CommandProcessor from '../components/terminal/CommandProcessor';
 import GitHubCard from '../components/cards/GitHubCard';
 import LinkedInCard from '../components/cards/LinkedInCard';
 import SpotifyCard from '../components/cards/SpotifyCard';
+import CourseraCard from '../components/cards/CourseraCard';
 import Navbar from '../components/navigation/Navbar';
 
 export default function Terminal() {
@@ -148,7 +149,8 @@ Try asking me anything - I'm here to help!`,
       {/* Draggable Cards - Position them first so they appear behind terminal */}
       <GitHubCard initialPosition={{ x: 20, y: 40 }} />
       <LinkedInCard initialPosition={{ x: 20, y: 180 }} />
-      <SpotifyCard initialPosition={{ x: 20, y: 320 }} />
+      <CourseraCard initialPosition={{ x: 20, y: 320 }} />
+      <SpotifyCard initialPosition={{ x: 20, y: 450 }} />
 
       {/* Matrix rain effect */}
       <AnimatePresence>
@@ -271,7 +273,7 @@ Try asking me anything - I'm here to help!`,
                   <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-yellow-500 shadow-lg shadow-yellow-500/50"></div>
                   <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-green-500 shadow-lg shadow-green-500/50"></div>
                 </div>
-                <span className="text-cyan-400 font-mono text-sm sm:text-base md:text-lg font-semibold">Agastya AI Terminal</span>
+                <span className="text-cyan-400 font-mono text-sm sm:text-base md:text-lg font-semibold">Harsh's AI Assistant</span>
               </div>
               <div className="text-xs sm:text-sm font-mono bg-cyan-400/10 px-2 py-1 sm:px-3 rounded-full border border-cyan-400/30" style={{ color: '#00d4aa' }}>
                 <span className="hidden sm:inline">{currentTime.toLocaleString()}</span>

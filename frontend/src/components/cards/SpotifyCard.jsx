@@ -7,7 +7,6 @@ export default function SpotifyCard({ initialPosition = { x: 20, y: 180 } }) {
     <DraggableCard 
       initialPosition={initialPosition}
       className="w-80 h-40"
-      glowColor="red"
     >
       <div className="w-full h-full">
         <iframe 
