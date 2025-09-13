@@ -1,16 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import BootSequence from '../components/terminal/BootSequence';
 import CommandInput from '../components/terminal/CommandInput';
 import OutputDisplay from '../components/terminal/OutputDisplay';
 import CommandProcessor from '../components/terminal/CommandProcessor';
 import GitHubCard from '../components/cards/GitHubCard';
 import LinkedInCard from '../components/cards/LinkedInCard';
 import SpotifyCard from '../components/cards/SpotifyCard';
-import BucketListCard from '../components/cards/BucketListCard';
+import Navbar from '../components/navigation/Navbar';
 
 export default function Terminal() {
-  const [isBooting, setIsBooting] = useState(true);
   const [outputs, setOutputs] = useState([]);
   const [commandHistory, setCommandHistory] = useState([]);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -25,6 +23,21 @@ export default function Terminal() {
       terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
     }
   }, [outputs]);
+
+  useEffect(() => {
+    // Initialize terminal with welcome message
+    setOutputs([{
+      id: Date.now(),
+      type: 'output',
+      content: `Welcome to my AI-powered portfolio terminal! 
+
+I'm Agastya, a personal AI assistant of Harsh Kakadiya.
+Type '/help' to see what we can explore together.
+Try asking me anything - I'm here to help!`,
+      timestamp: new Date().toLocaleTimeString(),
+      isTyping: true // Enable typewriter effect for welcome message
+    }]);
+  }, []);
 
   // Auto-scroll function that can be called during typing
   const handleAutoScroll = () => {
@@ -53,21 +66,6 @@ export default function Terminal() {
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
-
-  const handleBootComplete = () => {
-    setIsBooting(false);
-    setOutputs([{
-      id: Date.now(),
-      type: 'output',
-      content: `Welcome to my AI-powered portfolio terminal! 
-
-I'm Agastya, a personal AI assistant of Harsh Kakadiya.
-Type '/help' to see what we can explore together.
-Try asking me anything - I'm here to help!`,
-      timestamp: new Date().toLocaleTimeString(),
-      isTyping: true // Enable typewriter effect for welcome message
-    }]);
-  };
 
   const handleCommand = async (input) => {
     // Add command to history
@@ -129,12 +127,11 @@ Try asking me anything - I'm here to help!`,
     ));
   };
 
-  if (isBooting) {
-    return <BootSequence onComplete={handleBootComplete} />;
-  }
-
   return (
     <div className="min-h-screen bg-black relative overflow-hidden touch-manipulation">
+      {/* Navigation Bar */}
+      <Navbar />
+      
       {/* Grid Background */}
       <div 
         className="fixed inset-0 opacity-40"
@@ -152,7 +149,6 @@ Try asking me anything - I'm here to help!`,
       <GitHubCard initialPosition={{ x: 20, y: 40 }} />
       <LinkedInCard initialPosition={{ x: 20, y: 180 }} />
       <SpotifyCard initialPosition={{ x: 20, y: 320 }} />
-      <BucketListCard initialPosition={{ x: 950, y: 150 }} />
 
       {/* Matrix rain effect */}
       <AnimatePresence>

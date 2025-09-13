@@ -83,12 +83,17 @@ export default function BootSequence({ onComplete }) {
   useEffect(() => {
     if (!bootComplete) return;
 
-    const handleKeyPress = (e) => {
+    const handleBootComplete = () => {
+      // Just complete the boot sequence, don't navigate away
       onComplete();
     };
 
+    const handleKeyPress = (e) => {
+      handleBootComplete();
+    };
+
     const handleClick = () => {
-      onComplete();
+      handleBootComplete();
     };
 
     window.addEventListener('keydown', handleKeyPress);
