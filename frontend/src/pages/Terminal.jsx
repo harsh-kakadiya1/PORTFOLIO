@@ -4,6 +4,10 @@ import BootSequence from '../components/terminal/BootSequence';
 import CommandInput from '../components/terminal/CommandInput';
 import OutputDisplay from '../components/terminal/OutputDisplay';
 import CommandProcessor from '../components/terminal/CommandProcessor';
+import GitHubCard from '../components/cards/GitHubCard';
+import LinkedInCard from '../components/cards/LinkedInCard';
+import SpotifyCard from '../components/cards/SpotifyCard';
+import BucketListCard from '../components/cards/BucketListCard';
 
 export default function Terminal() {
   const [isBooting, setIsBooting] = useState(true);
@@ -143,6 +147,12 @@ Try asking me anything - I'm here to help!`,
           backgroundPosition: `${100 - mousePosition.x}% ${100 - mousePosition.y}%`
         }}
       />
+
+      {/* Draggable Cards - Position them first so they appear behind terminal */}
+      <GitHubCard initialPosition={{ x: 20, y: 100 }} />
+      <LinkedInCard initialPosition={{ x: 20, y: 250 }} />
+      <SpotifyCard initialPosition={{ x: 20, y: 400 }} />
+      <BucketListCard initialPosition={{ x: 20, y: 600 }} />
 
       {/* Matrix rain effect */}
       <AnimatePresence>
