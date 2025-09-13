@@ -38,7 +38,7 @@ export default function LinkedInCard({ initialPosition = { x: 350, y: 150 } }) {
 
         {/* Professional Info */}
         <div className="text-sm">
-          <div className="text-white font-medium">Full Stack Developer</div>
+          <div className="text-white font-medium">AI/ML Enthusiast</div>
           <div className="text-blue-200 text-xs">500+ Connections</div>
         </div>
 

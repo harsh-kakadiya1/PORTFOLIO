@@ -149,10 +149,10 @@ Try asking me anything - I'm here to help!`,
       />
 
       {/* Draggable Cards - Position them first so they appear behind terminal */}
-      <GitHubCard initialPosition={{ x: 20, y: 100 }} />
-      <LinkedInCard initialPosition={{ x: 20, y: 250 }} />
-      <SpotifyCard initialPosition={{ x: 20, y: 400 }} />
-      <BucketListCard initialPosition={{ x: 20, y: 600 }} />
+      <GitHubCard initialPosition={{ x: 20, y: 40 }} />
+      <LinkedInCard initialPosition={{ x: 20, y: 180 }} />
+      <SpotifyCard initialPosition={{ x: 20, y: 320 }} />
+      <BucketListCard initialPosition={{ x: 850, y: 150 }} />
 
       {/* Matrix rain effect */}
       <AnimatePresence>

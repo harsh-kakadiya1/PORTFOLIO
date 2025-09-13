@@ -39,15 +39,15 @@ export default function GitHubCard({ initialPosition = { x: 50, y: 150 } }) {
         {/* Stats */}
         <div className="flex gap-4 text-sm">
           <div className="text-center">
-            <div className="text-white font-bold">50+</div>
+            <div className="text-white font-bold">15+</div>
             <div className="text-gray-400 text-xs">Repos</div>
           </div>
           <div className="text-center">
-            <div className="text-white font-bold">1K+</div>
+            <div className="text-white font-bold">320+</div>
             <div className="text-gray-400 text-xs">Commits</div>
           </div>
           <div className="text-center">
-            <div className="text-white font-bold">10+</div>
+            <div className="text-white font-bold">40+</div>
             <div className="text-gray-400 text-xs">Stars</div>
           </div>
         </div>

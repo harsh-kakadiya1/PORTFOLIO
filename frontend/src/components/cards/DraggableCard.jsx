@@ -108,7 +108,7 @@ export default function DraggableCard({
         animate={{
           boxShadow: isHovered 
             ? "0 0 30px rgba(0, 255, 255, 0.6), 0 0 60px rgba(0, 255, 255, 0.3)" 
-            : "0 5px 15px rgba(0, 0, 0, 0.3)"
+            : "none"
         }}
         transition={{ duration: 0.3 }}
         className="relative"
