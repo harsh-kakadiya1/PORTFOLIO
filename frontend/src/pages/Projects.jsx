@@ -23,31 +23,42 @@ export default function Projects() {
       title: "AI-Powered Portfolio",
       description: "Interactive portfolio with terminal interface and AI features",
       tech: ["React", "Framer Motion", "Node.js"],
-      image: "/api/placeholder/400/250",
+      image: "/images/projects/portfolio-preview.png",
       github: "https://github.com/harsh-kakadiya1/portfolio",
       live: "#",
       status: "completed"
     },
     {
-      id: 2,
-      title: "Machine Learning Platform",
-      description: "End-to-end ML platform for data analysis and model deployment",
-      tech: ["Python", "TensorFlow", "FastAPI", "Docker"],
-      image: "/api/placeholder/400/250",
-      github: "#",
-      live: "#",
-      status: "in-progress"
-    },
+        id: 2,
+        title: "StyleMe - AI Fashion Stylist",
+        description: "StyleMe is a Flutter-based mobile application designed to be your personal fashion assistant.",
+        tech: ["Flutter", "Dart"],
+        image: "/images/projects/styleme-preview.png",
+        github: "https://github.com/harsh-kakadiya1/StyleMe--Your-Personal-AI-Fashion-Stylist",
+        live: "#",
+        status: "in-progress"
+      },
     {
       id: 3,
-      title: "Real-time Chat Application",
-      description: "WebSocket-based chat app with real-time messaging",
-      tech: ["React", "Socket.io", "Express", "MongoDB"],
+      title: "DataMimic.io",
+      description: "Advanced Synthetic Data Generation & No-Code EDA/Pre-processing Platform",
+      tech: ["Python", "Flask", "Pandas", "NumPy", "Scikit-learn", "Faker", "Bootstrap 5", "JavaScript"],
       image: "/api/placeholder/400/250",
-      github: "#",
-      live: "#",
+      github: "https://github.com/harsh-kakadiya1/DataMimic.io",
+      live: "https://datamimic-io.onrender.com/",
       status: "completed"
-    }
+    },
+    {
+        id: 4,
+        title: "Machine Learning Projects",
+        description: "Vast collection of ML projects for data analysis and model evaluation",
+        tech: ["Python","NumPy","Pandas","Matplotlib","Scikit-learn"],
+        image: "/api/placeholder/400/250",
+        github: "https://github.com/harsh-kakadiya1/Machine-Learning-projects",
+        live: "https://github.com/harsh-kakadiya1/Machine-Learning-projects",
+        status: "in-progress"
+      },
+    
   ];
 
   return (
