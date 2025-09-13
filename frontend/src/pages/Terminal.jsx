@@ -8,6 +8,7 @@ import LinkedInCard from '../components/cards/LinkedInCard';
 import SpotifyCard from '../components/cards/SpotifyCard';
 import CourseraCard from '../components/cards/CourseraCard';
 import Navbar from '../components/navigation/Navbar';
+import { useMobile } from '../hooks/useMobile';
 
 export default function Terminal() {
   const [outputs, setOutputs] = useState([]);
@@ -18,6 +19,7 @@ export default function Terminal() {
   const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 });
   const terminalRef = useRef(null);
   const commandProcessor = useRef(new CommandProcessor());
+  const { isMobile, isTablet } = useMobile();
 
   useEffect(() => {
     if (terminalRef.current) {
@@ -56,8 +58,10 @@ Try asking me anything - I'm here to help!`,
     return () => clearInterval(timer);
   }, []);
 
-  // Mouse tracking for parallax effect
+  // Mouse tracking for parallax effect (disabled on mobile for performance)
   useEffect(() => {
+    if (isMobile) return; // Skip mouse tracking on mobile
+    
     const handleMouseMove = (e) => {
       const x = (e.clientX / window.innerWidth) * 7;
       const y = (e.clientY / window.innerHeight) * 7;
@@ -66,7 +70,7 @@ Try asking me anything - I'm here to help!`,
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  }, [isMobile]);
 
   const handleCommand = async (input) => {
     // Add command to history
@@ -135,22 +139,26 @@ Try asking me anything - I'm here to help!`,
       
       {/* Grid Background */}
       <div 
-        className="fixed inset-0 opacity-40"
+        className={`fixed inset-0 ${isMobile ? 'opacity-20' : 'opacity-40'}`}
         style={{
           backgroundImage: `
             linear-gradient(rgba(0, 212, 170, 0.3) 2px, transparent 2px),
             linear-gradient(90deg, rgba(0, 212, 170, 0.3) 2px, transparent 2px)
           `,
-          backgroundSize: '70px 70px',
-          backgroundPosition: `${100 - mousePosition.x}% ${100 - mousePosition.y}%`
+          backgroundSize: isMobile ? '50px 50px' : '70px 70px',
+          backgroundPosition: isMobile ? 'center' : `${100 - mousePosition.x}% ${100 - mousePosition.y}%`
         }}
       />
 
-      {/* Draggable Cards - Position them first so they appear behind terminal */}
-      <GitHubCard initialPosition={{ x: 20, y: 40 }} />
-      <LinkedInCard initialPosition={{ x: 20, y: 180 }} />
-      <CourseraCard initialPosition={{ x: 20, y: 320 }} />
-      <SpotifyCard initialPosition={{ x: 20, y: 450 }} />
+      {/* Draggable Cards - Only show on desktop */}
+      {!isMobile && !isTablet && (
+        <>
+          <GitHubCard initialPosition={{ x: 20, y: 40 }} />
+          <LinkedInCard initialPosition={{ x: 20, y: 180 }} />
+          <CourseraCard initialPosition={{ x: 20, y: 320 }} />
+          <SpotifyCard initialPosition={{ x: 20, y: 450 }} />
+        </>
+      )}
 
       {/* Matrix rain effect */}
       <AnimatePresence>
@@ -262,22 +270,28 @@ Try asking me anything - I'm here to help!`,
       </div>
 
       {/* Terminal Container */}
-      <div className="relative z-20 flex items-center justify-center min-h-screen p-2 sm:p-4 md:p-6 lg:p-8">
-        <div className="w-full max-w-5xl h-[85vh] sm:h-[80vh] md:h-[75vh] lg:h-[70vh] flex flex-col bg-black/95 backdrop-blur-lg border border-cyan-400/50 rounded-lg sm:rounded-xl shadow-2xl shadow-cyan-500/20">
+      <div className={`relative z-20 flex items-center justify-center min-h-screen ${isMobile ? 'p-1' : 'p-2 sm:p-4 md:p-6 lg:p-8'}`}>
+        <div className={`w-full max-w-5xl ${isMobile ? 'h-[95vh]' : 'h-[85vh] sm:h-[80vh] md:h-[75vh] lg:h-[70vh]'} flex flex-col bg-black/95 backdrop-blur-lg border border-cyan-400/50 ${isMobile ? 'rounded-lg' : 'rounded-lg sm:rounded-xl'} shadow-2xl shadow-cyan-500/20`}>
           {/* Header */}
-          <div className="flex-shrink-0 border-b border-cyan-400/40 bg-gradient-to-r from-black/90 to-gray-900/90 rounded-t-lg sm:rounded-t-xl">
-            <div className="flex items-center justify-between p-2 sm:p-3 md:p-4">
-              <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
-                <div className="flex gap-1 sm:gap-2">
-                  <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-red-500 shadow-lg shadow-red-500/50"></div>
-                  <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-yellow-500 shadow-lg shadow-yellow-500/50"></div>
-                  <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-green-500 shadow-lg shadow-green-500/50"></div>
+          <div className={`flex-shrink-0 border-b border-cyan-400/40 bg-gradient-to-r from-black/90 to-gray-900/90 ${isMobile ? 'rounded-t-lg' : 'rounded-t-lg sm:rounded-t-xl'}`}>
+            <div className={`flex items-center justify-between ${isMobile ? 'p-2' : 'p-2 sm:p-3 md:p-4'}`}>
+              <div className={`flex items-center ${isMobile ? 'gap-2' : 'gap-2 sm:gap-3 md:gap-4'}`}>
+                <div className={`flex ${isMobile ? 'gap-1' : 'gap-1 sm:gap-2'}`}>
+                  <div className={`${isMobile ? 'w-2 h-2' : 'w-3 h-3 sm:w-4 sm:h-4'} rounded-full bg-red-500 shadow-lg shadow-red-500/50`}></div>
+                  <div className={`${isMobile ? 'w-2 h-2' : 'w-3 h-3 sm:w-4 sm:h-4'} rounded-full bg-yellow-500 shadow-lg shadow-yellow-500/50`}></div>
+                  <div className={`${isMobile ? 'w-2 h-2' : 'w-3 h-3 sm:w-4 sm:h-4'} rounded-full bg-green-500 shadow-lg shadow-green-500/50`}></div>
                 </div>
-                <span className="text-cyan-400 font-mono text-sm sm:text-base md:text-lg font-semibold">Harsh's AI Assistant</span>
+                <span className={`text-cyan-400 font-mono ${isMobile ? 'text-xs' : 'text-sm sm:text-base md:text-lg'} font-semibold`}>
+                  {isMobile ? "AI Assistant" : "Harsh's AI Assistant"}
+                </span>
               </div>
-              <div className="text-xs sm:text-sm font-mono bg-cyan-400/10 px-2 py-1 sm:px-3 rounded-full border border-cyan-400/30" style={{ color: '#00d4aa' }}>
-                <span className="hidden sm:inline">{currentTime.toLocaleString()}</span>
-                <span className="sm:hidden">{currentTime.toLocaleTimeString()}</span>
+              <div className={`${isMobile ? 'text-xs' : 'text-xs sm:text-sm'} font-mono bg-cyan-400/10 px-2 py-1 sm:px-3 rounded-full border border-cyan-400/30`} style={{ color: '#00d4aa' }}>
+                {isMobile ? currentTime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : (
+                  <>
+                    <span className="hidden sm:inline">{currentTime.toLocaleString()}</span>
+                    <span className="sm:hidden">{currentTime.toLocaleTimeString()}</span>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -285,7 +299,7 @@ Try asking me anything - I'm here to help!`,
           {/* Terminal Output */}
           <div 
             ref={terminalRef}
-            className="flex-1 overflow-auto bg-black/90 backdrop-blur-sm p-2 sm:p-4 md:p-6 space-y-2 sm:space-y-3 scrollbar-thin scrollbar-track-black scrollbar-thumb-cyan-500/40 font-mono text-xs sm:text-sm"
+            className={`flex-1 overflow-auto bg-black/90 backdrop-blur-sm ${isMobile ? 'p-2 space-y-1' : 'p-2 sm:p-4 md:p-6 space-y-2 sm:space-y-3'} scrollbar-thin scrollbar-track-black scrollbar-thumb-cyan-500/40 font-mono ${isMobile ? 'text-xs' : 'text-xs sm:text-sm'}`}
           >
             <AnimatePresence>
               {outputs.map((output) => (
@@ -295,12 +309,14 @@ Try asking me anything - I'm here to help!`,
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.2 }}
-                  className="mb-2"
+                  className={isMobile ? 'mb-1' : 'mb-2'}
                 >
                   {output.type === 'command' && (
-                    <div className="flex flex-col sm:flex-row sm:items-center mb-2 sm:mb-4">
-                      <span className="mr-0 sm:mr-2 mb-1 sm:mb-0 text-xs sm:text-sm" style={{ color: '#00ff41' }}>guest@ai-portfolio:~$</span>
-                      <span className="text-xs sm:text-sm break-all sm:break-normal" style={{ 
+                    <div className={`flex ${isMobile ? 'flex-col' : 'flex-col sm:flex-row sm:items-center'} ${isMobile ? 'mb-1' : 'mb-2 sm:mb-4'}`}>
+                      <span className={`${isMobile ? 'mr-0 mb-0' : 'mr-0 sm:mr-2 mb-1 sm:mb-0'} ${isMobile ? 'text-xs' : 'text-xs sm:text-sm'}`} style={{ color: '#00ff41' }}>
+                        {isMobile ? 'guest@ai:~$' : 'guest@ai-portfolio:~$'}
+                      </span>
+                      <span className={`${isMobile ? 'text-xs break-all' : 'text-xs sm:text-sm break-all sm:break-normal'}`} style={{ 
                         color: output.content.startsWith('/') ? '#00d4ff' : '#ffaa00' 
                       }}>
                         {output.content}
@@ -309,7 +325,7 @@ Try asking me anything - I'm here to help!`,
                   )}
                   
                   {output.type === 'output' && (
-                    <div className="mb-4 sm:mb-6">
+                    <div className={isMobile ? 'mb-2' : 'mb-4 sm:mb-6'}>
                       <OutputDisplay 
                         content={output.content} 
                         isTyping={output.isTyping}
@@ -321,13 +337,13 @@ Try asking me anything - I'm here to help!`,
                   )}
                   
                   {output.type === 'error' && (
-                    <div style={{ color: '#ff6b6b' }} className="font-mono mb-2 sm:mb-4 text-xs sm:text-sm break-words">
+                    <div style={{ color: '#ff6b6b' }} className={`font-mono ${isMobile ? 'mb-1 text-xs' : 'mb-2 sm:mb-4 text-xs sm:text-sm'} break-words`}>
                       ERROR: {output.content}
                     </div>
                   )}
 
                   {output.type === 'warning' && (
-                    <div style={{ color: '#ff6b6b' }} className="font-mono mb-2 sm:mb-4 text-xs sm:text-sm break-words">
+                    <div style={{ color: '#ff6b6b' }} className={`font-mono ${isMobile ? 'mb-1 text-xs' : 'mb-2 sm:mb-4 text-xs sm:text-sm'} break-words`}>
                       WARNING: {output.content}
                     </div>
                   )}
@@ -337,8 +353,8 @@ Try asking me anything - I'm here to help!`,
           </div>
 
           {/* Command Input */}
-          <div className="flex-shrink-0 border-t border-cyan-400/40 bg-gradient-to-r from-black/90 to-gray-900/90 rounded-b-lg sm:rounded-b-xl">
-            <div className="p-2 sm:p-3 md:p-4">
+          <div className={`flex-shrink-0 border-t border-cyan-400/40 bg-gradient-to-r from-black/90 to-gray-900/90 ${isMobile ? 'rounded-b-lg' : 'rounded-b-lg sm:rounded-b-xl'}`}>
+            <div className={isMobile ? 'p-2' : 'p-2 sm:p-3 md:p-4'}>
               <CommandInput 
                 onCommand={handleCommand}
                 isProcessing={isProcessing}

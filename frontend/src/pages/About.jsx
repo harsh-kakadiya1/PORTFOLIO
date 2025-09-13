@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '../components/navigation/Navbar';
 import BootSequence from '../components/terminal/BootSequence';
+import { useMobile } from '../hooks/useMobile';
 
 export default function About() {
   const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 });
   const [isBooting, setIsBooting] = useState(true);
+  const { isMobile } = useMobile();
 
   // Mouse tracking for parallax effect
   useEffect(() => {
@@ -22,6 +24,13 @@ export default function About() {
   const handleBootComplete = () => {
     setIsBooting(false);
   };
+
+  // Skip boot animation on mobile devices
+  useEffect(() => {
+    if (isMobile) {
+      setIsBooting(false);
+    }
+  }, [isMobile]);
 
   const education = [
     {
@@ -59,7 +68,7 @@ export default function About() {
     }
   ];
 
-  if (isBooting) {
+  if (isBooting && !isMobile) {
     return <BootSequence onComplete={handleBootComplete} />;
   }
 
