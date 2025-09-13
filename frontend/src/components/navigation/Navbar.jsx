@@ -7,10 +7,10 @@ export default function Navbar() {
   const location = useLocation();
 
   const navItems = [
-    { id: 'about', label: 'About', icon: '👨‍💻', path: '/' },
-    { id: 'terminal', label: 'Terminal', icon: '💻', path: '/terminal' },
-    { id: 'projects', label: 'Projects', icon: '🚀', path: '/projects' },
-    { id: 'playground', label: 'Playground', icon: '🎮', path: '/playground' }
+    { id: 'about', label: 'About', icon: '◉', path: '/' },
+    { id: 'terminal', label: 'Terminal', icon: '▣', path: '/terminal' },
+    { id: 'projects', label: 'Projects', icon: '▲', path: '/projects' },
+    { id: 'playground', label: 'Playground', icon: '◈', path: '/playground' }
   ];
 
   const getCurrentPage = () => {

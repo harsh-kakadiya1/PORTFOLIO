@@ -84,10 +84,10 @@ export default function DraggableCard({
       animate={{ 
         x: position.x, 
         y: position.y,
-        scale: isHovered ? 1.05 : 1
+        scale: 1
       }}
       whileDrag={{ 
-        scale: 1.02,
+        scale: 1,
         zIndex: 1000
       }}
       transition={{

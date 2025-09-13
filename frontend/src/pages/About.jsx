@@ -25,16 +25,22 @@ export default function About() {
 
   const education = [
     {
-      degree: "Bachelor of Technology in Computer Science",
-      institution: "Gujarat Technological University",
-      year: "2021 - 2025",
-      description: "Specialized in AI/ML, Data Structures, and Software Engineering"
+      degree: "Secondary Education",
+      institution: "Kaushal Vidhyalay, Surat, Gujarat",
+      year: "2019 - 2021",
+      description: "Completed 10th standard with excellent academic performance. Built foundation in core subjects."
     },
     {
-      degree: "Higher Secondary Certificate",
-      institution: "Science Stream",
-      year: "2019 - 2021",
-      description: "Mathematics, Physics, Chemistry with Computer Science"
+      degree: "Higher Secondary Education",
+      institution: "Kaushal Vidhyalay, Surat, Gujarat",
+      year: "2021 - 2023",
+      description: "Completed 12th standard with focus on Mathematics. Developed strong analytical and problem-solving skills."
+    },
+    {
+      degree: "Bachelor of Technology: Artificial Intelligence and Machine Learning",
+      institution: "Charotar University of Science and Technology, Changa, Gujarat",
+      year: "2023 - 2027 (Present)",
+      description: "Specialized in AI-ML development, Data analytics, algorithms, problem-solving and modern web technologies."
     }
   ];
 
@@ -113,12 +119,16 @@ export default function About() {
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
                 <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                  I'm Harsh Kakadiya, a passionate developer who believes in the power of technology to solve real-world problems. 
-                  My journey started with curiosity about how things work and evolved into a deep love for creating digital experiences.
+                  They say data is the new oil, and I'm a 3rd-year AI/ML student who's not 
+                  afraid to get my hands dirty. I've spent my time wrangling messy datasets 
+                  and coaxing insights out of them, proving that I'm fluent in both Python 
+                  and the art of convincing a database to behave. 
                 </p>
                 <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                  Currently pursuing my B.Tech in Computer Science, I specialize in AI/ML technologies while maintaining 
-                  strong full-stack development skills. I enjoy building scalable applications and exploring the latest in tech innovation.
+                  My portfolio is a collection of my proudest moments—where I've built models 
+                  that actually work, not just on paper. From predictive analytics to the 
+                  occasional deep learning experiment, I'm here to turn complex problems into 
+                  elegant, and sometimes surprisingly funny, solutions.
                 </p>
                 <p className="text-gray-300 text-lg leading-relaxed">
                   When I'm not coding, you'll find me exploring new technologies, contributing to open source projects, 
@@ -199,7 +209,7 @@ export default function About() {
           >
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                My Experience
+                My <span className="text-cyan-400">Experience</span>
               </h2>
               <p className="text-gray-400 text-lg max-w-2xl mx-auto">
                 Professional journey and key projects that shaped my development skills.
