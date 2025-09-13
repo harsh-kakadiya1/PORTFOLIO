@@ -32,8 +32,8 @@ export default function Navbar() {
       transition={{ duration: 0.6 }}
       className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50"
     >
-      <div className="bg-black/20 backdrop-blur-lg border border-white/10 rounded-2xl px-2 py-2 shadow-2xl">
-        <div className="flex items-center gap-2">
+      <div className="bg-black/20 backdrop-blur-lg border border-white/10 rounded-2xl px-3 py-2 shadow-2xl">
+        <div className="flex items-center gap-3">
           {navItems.map((item) => (
             <motion.button
               key={item.id}

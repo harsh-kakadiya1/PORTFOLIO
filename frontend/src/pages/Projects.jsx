@@ -43,7 +43,7 @@ export default function Projects() {
       title: "DataMimic.io",
       description: "Advanced Synthetic Data Generation & No-Code EDA/Pre-processing Platform",
       tech: ["Python", "Flask", "Pandas", "NumPy", "Scikit-learn", "Faker", "Bootstrap 5", "JavaScript"],
-      image: "/api/placeholder/400/250",
+      image: "/images/projects/datamimic-preview.png",
       github: "https://github.com/harsh-kakadiya1/DataMimic.io",
       live: "https://datamimic-io.onrender.com/",
       status: "completed"
@@ -53,10 +53,20 @@ export default function Projects() {
         title: "Machine Learning Projects",
         description: "Vast collection of ML projects for data analysis and model evaluation",
         tech: ["Python","NumPy","Pandas","Matplotlib","Scikit-learn"],
-        image: "/api/placeholder/400/250",
+        image: "/images/projects/ml-project-preview.png",
         github: "https://github.com/harsh-kakadiya1/Machine-Learning-projects",
         live: "https://github.com/harsh-kakadiya1/Machine-Learning-projects",
         status: "in-progress"
+      },
+      {
+        id: 5,
+        title: "INFINITE-WIKI",
+        description: "An AI-powered encyclopedia application that generates encyclopedia-style definitions and ASCII art visualizations for any topic using Google's Gemini 2.5 Flash API.",
+        tech: ["React 19","TypeScript","Vite 6","Gemini 2.5 Flash"],
+        image: "/images/projects/infinite-wiki-preview.png",
+        github: "https://github.com/harsh-kakadiya1/INFINITE-WIKI",
+        live: "https://infinite-wikip.netlify.app/",
+        status: "completed"
       },
     
   ];
@@ -108,6 +118,14 @@ export default function Projects() {
             >
               {/* Project Image */}
               <div className="relative h-48 bg-gradient-to-br from-cyan-500/20 to-purple-500/20 overflow-hidden">
+                <img 
+                  src={project.image} 
+                  alt={project.title}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                  }}
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 <div className="absolute top-4 right-4">
                   <span className={`px-3 py-1 rounded-full text-xs font-medium ${
